@@ -8,15 +8,32 @@ namespace ConsoleApp1
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            Console.WriteLine("Hello World!");
+            Console.Write("Quel est ton nom ? ");
+            string nom = Console.ReadLine();
 
-            Console.WriteLine("Veuillez entrez votre nom.");
-            string name = Console.ReadLine();
+            int age_num = 0;
 
-            Console.WriteLine("Veuillez maintenant entrez votre âge.");
-            string age = Console.ReadLine();
+            while (age_num == 0)
+            {
+                Console.Write("Quel est ton age ? ");
+                string age_str = Console.ReadLine();
 
-            Console.WriteLine("Bonjour, vous vous appelez " + name + " et votre âge est : " + age);
+                try
+                {
+                    age_num = int.Parse(age_str);
+                }
+                catch
+                {
+                    Console.WriteLine("Erreur, vous devez rentrer un age valide.");
+                }
+            }
+
+            // ici age_num est forcément différent de 0
+
+            Console.WriteLine("Bonjour, vous vous appelez " + nom + ", vous avez " + age_num + " ans");
+
+            int age_prochain = age_num + 1;
+            Console.WriteLine("bientôt vous aurez " + age_prochain + " ans");
         }
     }
 }
