@@ -6,75 +6,57 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            string nom = "";
-
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            while (nom == "" || (int.TryParse(nom, out int _)))
+
+            string nom = "";
+            while (string.IsNullOrEmpty(nom) || int.TryParse(nom, out int _))
             {
                 Console.Write("Quel est ton nom ? ");
-                nom = Console.ReadLine();
-                nom.Trim();
+                nom = Console.ReadLine().Trim();
 
-                try
+                if (string.IsNullOrEmpty(nom))
                 {
-
-                    if (nom == "")
-                    {
-                        Console.WriteLine("Erreur: Le nom ne doit pas être vide");
-                    }
-                    else if (int.TryParse(nom, out int _))
-                    {
-                        Console.WriteLine("Erreur: Le nom ne doit pas être un nombre");
-                    }
+                    Console.WriteLine("Erreur: Le nom ne doit pas être vide.");
                 }
-                catch
+                else if (int.TryParse(nom, out int _))
                 {
-
+                    Console.WriteLine("Erreur: Le nom ne doit pas être un nombre.");
                 }
             }
-
-
-
 
             int age_num = 0;
-
             while (age_num <= 0)
             {
-                Console.Write("Quel est ton age ? ");
-                string age_str = Console.ReadLine();
+                Console.Write("Quel est ton âge ? ");
+                string age_str = Console.ReadLine().Trim();
 
-                try
+                if (string.IsNullOrEmpty(age_str) || !int.TryParse(age_str, out age_num) || age_num <= 0)
                 {
-                    int? age_null = age_num;
-                    age_num = int.Parse(age_str);
-
-
-                    if (age_null == null)
+                    if (string.IsNullOrEmpty(age_str))
                     {
-                        Console.WriteLine("Erreur: l'âge ne doit pas être vide");
+                        Console.WriteLine("Erreur: L'âge ne doit pas être vide.");
                     }
-
-                    if (age_num < 0)
+                    else if (!int.TryParse(age_str, out age_num))
                     {
-                        Console.WriteLine("Erreur: L'âge ne doit pas être négatif");
+                        Console.WriteLine("Erreur: Veuillez entrer un nombre valide pour l'âge.");
                     }
-                    if (age_num == 0)
+                    else if (age_num <= 0)
                     {
-                        Console.WriteLine("Erreur: L'âge ne doit pas être zéro");
+                        if (age_num < 0)
+                        {
+                            Console.WriteLine("Erreur: L'âge ne doit pas être négatif.");
+                        }
+                        if (age_num == 0)
+                        {
+                            Console.WriteLine("Erreur: L'âge ne doit pas être zéro.");
+                        }
                     }
                 }
-                catch
-                {
-                    Console.WriteLine("Erreur: vous devez rentrer un age valide.");
-                }
-
-
             }
 
-            Console.WriteLine("Bonjour, vous vous appelez " + nom + ", vous avez " + age_num + " ans");
-
+            Console.WriteLine("Bonjour, vous vous appelez " + nom + ", vous avez " + age_num + " ans.");
             int age_prochain = age_num + 1;
-            Console.WriteLine("bientôt vous aurez " + age_prochain + " ans");
+            Console.WriteLine("Bientôt vous aurez " + age_prochain + " ans.");
         }
     }
 }
